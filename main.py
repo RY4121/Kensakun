@@ -49,5 +49,6 @@ if __name__ == "__main__":
 #    app.run()
 #追加しましたby YUTO
 #追加しましたby Ryoga
+#追加しました2by YUTO
     port = int(os.getenv("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
