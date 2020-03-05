@@ -125,7 +125,7 @@ def reply_message(event, messages):
 
 def push_message(event, messages):
     line_bot_api.push_message(
-        event['source']['userId'],
+        event.source.user_id,
         messages=messages
     )
 
