@@ -78,6 +78,7 @@ def handle_message(event):
         # reply_message(event, messages)
         # result_listは2重配列
         result_list = wget.getStoreInfo(event.message.text)
+        del result_list[5:]
         for list in result_list:
             out_text1 = list[0]
             out_text2 = list[1]
@@ -88,7 +89,11 @@ def handle_message(event):
                     TextSendMessage(text=out_text2)
                 ]
             )
-
+        push_message(
+            event, [
+                TextSendMessage(text='Enjoy masturbation!!')
+            ]
+        )
         # reply_message(event, messages)
     except Exception as e:
         print("error:", e)

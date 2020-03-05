@@ -33,17 +33,26 @@ sys.path.append(str(current_dir) + '/../')
 # from modules.update_db import *
 
 
+def getValueListBySelect(soup):
+    select_value_list = []
+    for option in soup.find('div', class_='list-unit').find_all('option'):
+        select_value_list.append(option['value'])
+        # print('value::', option)
+
+    return select_value_list
+
+
 def form_submit(base_url, search_word):
     print('input form_submit()')
     options = Options()
     options.add_argument('--headless')
     options.add_argument('--disable-gpu')
     driver = webdriver.Chrome(options=options)
-# https://www.dmm.co.jp/search/=/searchstr=%E5%AE%89%E9%BD%8B%E3%82%89%E3%82%89/analyze=V1ECCVYFUQc_/sort=rankprofile/
+
     html_list = []
     try:
         driver.get(base_url)
-        time.sleep(5)
+        time.sleep(2)
         print('url::', base_url)
         print('driver.get(base_url)')
 
@@ -61,6 +70,18 @@ def form_submit(base_url, search_word):
         # input = driver.find_element_by_xpath(
         #     '/html/body/header/div[2]/div[1]/form/div[3]')
         # driver.execute_script("arguments[0].click();", input)
+        print('input.send_keys(Keys.ENTER)')
+        time.sleep(5)
+
+        # 検索後のページをソートする
+        soup = BeautifulSoup(driver.page_source, "html.parser")
+        # ソート後のページのURLを取得する
+        select_value = getValueListBySelect(soup)
+        # prefecture_select = driver.find_element_by_xpath(
+        #     '//*[@id="main-src"]/div/div[1]/div[2]/form/div/div/select')
+        # prefecture_select_element = Select(prefecture_select)
+        # prefecture_select_element.select_by_value(select_value)
+        driver.get(select_value[0])
         time.sleep(5)
         print('ラストスパート')
 
@@ -76,7 +97,8 @@ def form_submit(base_url, search_word):
 
 
 def getStoreInfo(search_word):
-    base_url = 'https://www.dmm.co.jp/top/'
+    # base_url = 'https://www.dmm.co.jp/top/'
+    base_url = 'https://www.dmm.co.jp/digital/'
 
     html_list = form_submit(base_url, search_word)
 
@@ -117,4 +139,4 @@ def getStoreInfo(search_word):
 
 # 実行用
 # if __name__ == "__main__":
-#     getStoreInfo('安齋らら')
+#     getStoreInfo('紗倉まな')
