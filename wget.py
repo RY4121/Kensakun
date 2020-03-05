@@ -47,12 +47,15 @@ def form_submit(base_url, search_word):
         print('url::', base_url)
         print('driver.get(base_url)')
 
-        word = driver.find_element_by_id('naviapi-search-text')
+        # word = driver.find_element_by_id('naviapi-search-text')
+        # word.send_keys(search_word)
+        word = driver.find_element_by_xpath('//*[@id="naviapi-search-text"]')
         word.send_keys(search_word)
         time.sleep(5)
         print('word.send_keys(search_word)')
 
         driver.find_element_by_id('naviapi-search-submit').click()
+        # driver.execute_script("arguments[0].click();", word)
         time.sleep(5)
         print('ラストスパート')
 
@@ -75,6 +78,7 @@ def getStoreInfo(search_word):
     title_list = []
     link_list = []
     error_flag = False
+    em = ''
     for html in html_list:
         # print('html source::', html)
         soup = BeautifulSoup(html, "html.parser")
@@ -88,11 +92,15 @@ def getStoreInfo(search_word):
             except Exception as e:
                 print('Exception::', e)
                 error_flag = True
+                em = str(e)
                 continue
 
     if error_flag:
         title_list.append('何らかの理由で取得できませんでした')
-        link_list.append(str(e))
+        link_list.append(em)
+    else:
+        title_list.append('Seki')
+        link_list.append('Akio')
 
     result_list = []
     for x, y in zip(title_list, link_list):
