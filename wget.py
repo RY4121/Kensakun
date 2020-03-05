@@ -52,7 +52,7 @@ def form_submit(base_url, search_word):
     html_list = []
     try:
         driver.get(base_url)
-        time.sleep(2)
+        time.sleep(5)
         print('url::', base_url)
         print('driver.get(base_url)')
 

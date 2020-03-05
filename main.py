@@ -78,7 +78,7 @@ def handle_message(event):
         # reply_message(event, messages)
         # result_listは2重配列
         result_list = wget.getStoreInfo(event.message.text)
-        del result_list[5:]
+        # del result_list[5:]
         for list in result_list:
             out_text1 = list[0]
             out_text2 = list[1]
