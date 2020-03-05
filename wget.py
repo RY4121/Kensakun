@@ -28,6 +28,7 @@ import requests
 from requests.compat import urljoin
 current_dir = pathlib.Path(__file__).resolve().parent
 sys.path.append(str(current_dir) + '/../')
+
 # from modules.db_util import *
 # from modules.update_db import *
 
