@@ -79,10 +79,17 @@ def handle_message(event):
         # result_listは2重配列
         result_list = wget.getStoreInfo(event.message.text)
         for list in result_list:
-            out_text = list[0] + '\n' + list[1]
-            messages.append(TextSendMessage(text=out_text))
+            out_text1 = list[0]
+            out_text2 = list[1]
+            # messages.append(TextSendMessage(text=out_text))
+            push_message(
+                event, [
+                    TextSendMessage(text=out_text1)
+                    TextSendMessage(text=out_text2)
+                ]
+            )
 
-        reply_message(event, messages)
+        # reply_message(event, messages)
     except Exception as e:
         print("error:", e)
         reply_message(
