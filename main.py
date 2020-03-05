@@ -39,7 +39,7 @@ def callback():
     return 'OK'
 
 
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(MessageEvent, message=StickerMessage)
 def handle_message(event):
     # wget.getStoreInfo(event.message.text)
     # line_bot_api.reply_message(
