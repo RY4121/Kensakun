@@ -47,13 +47,12 @@ def handle_message(event):
         StickerSendMessage(package_id=event.message.package_id, sticker_id=event.message.sticker_id))
 
 # メッセージが送られてきたときの処理
-@handler.add(MessageEvent, message=StickerMessage)
+@handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     # wget.getStoreInfo(event.message.text)
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text='うんこ漏れそう'))
-    # text = event.message.text)
 
 # 画像が送られきた時の処理
 @handler.add(MessageEvent, message=ImageMessage)
@@ -68,7 +67,7 @@ def handle_image(event):
         # result=search_product(image)
 
         messages = [
-            TextSendMessage(text=result),
+            TextSendMessage(text='result'),
             TextSendMessage(text='食品パッケージ/書籍/CD/DVD/ゲームソフト/PCソフトを検索できるよ！')
         ]
 
