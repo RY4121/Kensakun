@@ -54,9 +54,11 @@ def form_submit(base_url, search_word):
         time.sleep(5)
         print('word.send_keys(search_word)')
 
-        input = driver.find_element_by_xpath(
-            '//*[@id="naviapi-search-submit"]').click()
-        driver.execute_script("arguments[0].click();", input)
+        driver.find_element_by_xpath(
+            '/html/body/header/div[2]/div[1]/form/div[3]').click()
+        # input = driver.find_element_by_xpath(
+        #     '//*[@id="naviapi-search-submit"]').click()
+        # driver.execute_script("arguments[0].click();", input)
         time.sleep(5)
         print('ラストスパート')
 

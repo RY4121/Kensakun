@@ -71,7 +71,10 @@ def handle_message(event):
         #     TextSendMessage(text='うんこ漏れそう'))
 
         messages = []
-        TextSendMessage(text='少々お待ちください')
+        push_message(
+            event,
+            TextSendMessage(text='少々お待ちください')
+        )
         # reply_message(event, messages)
         # result_listは2重配列
         result_list = wget.getStoreInfo(event.message.text)
@@ -116,6 +119,13 @@ def handle_image(event):
 def reply_message(event, messages):
     line_bot_api.reply_message(
         event.reply_token,
+        messages=messages
+    )
+
+
+def push_message(event, messages):
+    line_bot_api.push_message(
+        source.userId,
         messages=messages
     )
 
