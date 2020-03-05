@@ -42,11 +42,11 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     # wget.getStoreInfo(event.message.text)
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text='うんこ漏れそう'))
+    # line_bot_api.reply_message(
+    #     event.reply_token,
+    #     TextSendMessage(text='うんこ漏れそう'))
     # text=event.message.text)
-
+    time.sleep(1)
     line_bot_api.reply_message(
         event.reply_token,
         StickerSendMessage(package_id=event.message.package_id, sticker_id=event.message.sticker_id))
