@@ -59,9 +59,13 @@ def handle_message(event):
 def handle_message(event):
     # wget.getStoreInfo(event.message.text)
     try:
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text='うんこ漏れそう'))
+        messages = [
+            TextSendMessage(text='うんこ漏れそう'),
+            TextSendMessage(text=event.message.text)
+        ]
+        # line_bot_api.reply_message(
+        #     event.reply_token,
+        #     TextSendMessage(text='うんこ漏れそう'))
         reply_message(event, messages)
     except Exception as e:
         print("error:", e)
