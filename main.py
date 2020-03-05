@@ -10,7 +10,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, URIAction  # こ↑こ↓が追加分
 )
 import os
-import wget
+# import wget
 app = Flask(__name__)
 
 # 環境変数取得
