@@ -54,9 +54,9 @@ def form_submit(base_url, search_word):
         time.sleep(5)
         print('word.send_keys(search_word)')
 
-        driver.find_element_by_xpath(
+        input = driver.find_element_by_xpath(
             '//*[@id="naviapi-search-submit"]').click()
-        # driver.execute_script("arguments[0].click();", word)
+        driver.execute_script("arguments[0].click();", input)
         time.sleep(5)
         print('ラストスパート')
 
@@ -112,5 +112,5 @@ def getStoreInfo(search_word):
 
 
 # 実行用
-if __name__ == "__main__":
-    getStoreInfo('安齋らら')
+# if __name__ == "__main__":
+#     getStoreInfo('安齋らら')

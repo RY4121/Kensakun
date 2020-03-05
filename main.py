@@ -70,8 +70,9 @@ def handle_message(event):
         #     event.reply_token,
         #     TextSendMessage(text='うんこ漏れそう'))
 
-        messages = [TextSendMessage(text='少々お待ちください')]
-        reply_message(event, messages)
+        messages = []
+        TextSendMessage(text='少々お待ちください')
+        # reply_message(event, messages)
         # result_listは2重配列
         result_list = wget.getStoreInfo(event.message.text)
         for list in result_list:
