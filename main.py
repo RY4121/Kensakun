@@ -7,9 +7,10 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, URIAction, StickerMessage, StickerSendMessage  # こ↑こ↓が追加分
+    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, URIAction, StickerMessage, StickerSendMessage, ImageMessage  # こ↑こ↓が追加分
 )
 import os
+# from io import BytesIO
 # import wget
 app = Flask(__name__)
 
@@ -38,22 +39,54 @@ def callback():
 
     return 'OK'
 
-
+# スタンプが送られてきた時の処理
 @handler.add(MessageEvent, message=StickerMessage)
 def handle_message(event):
-    # wget.getStoreInfo(event.message.text)
-    # line_bot_api.reply_message(
-    #     event.reply_token,
-    #     TextSendMessage(text='うんこ漏れそう'))
-    # text=event.message.text)
-    # time.sleep(1)
     line_bot_api.reply_message(
         event.reply_token,
         StickerSendMessage(package_id=event.message.package_id, sticker_id=event.message.sticker_id))
+
+# メッセージが送られてきたときの処理
+@handler.add(MessageEvent, message=StickerMessage)
+def handle_message(event):
+    # wget.getStoreInfo(event.message.text)
+    line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage(text='うんこ漏れそう'))
+    text = event.message.text)
+
+# 画像が送られきた時の処理
+@handler.add(MessageEvent, message = ImageMessage)
+def handle_image(event):
+    # print("handle_image:", event)
+    message_id=event.message.id
+    message_content=line_bot_api.get_message_content(message_id)
+
+    # image=BytesIO(message_content.content)
+
+    try:
+        # result=search_product(image)
+
+        messages=[
+            TextSendMessage(text=result),
+            TextSendMessage(text='食品パッケージ/書籍/CD/DVD/ゲームソフト/PCソフトを検索できるよ！')
+        ]
+
+        reply_message(event,messages)
+
+    except Exception as e:
+        print("error:", e)
+        reply_message(event, TextSendMessage(text='エラーが発生しました'))
+
+def reply_message(event,messages):
+    line_bot_api.reply_message(
+        event.reply_token,
+        messages=messages
+    )
 
 
 if __name__ == "__main__":
     #    app.run()
     # 追加しましたby Ryoga 2020/3/5
-    port = int(os.getenv("PORT", 5000))
-    app.run(host="0.0.0.0", port=port)
+    port=int(os.getenv("PORT", 5000))
+    app.run(host = "0.0.0.0", port = port)
