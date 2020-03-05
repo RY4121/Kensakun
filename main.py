@@ -53,32 +53,33 @@ def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text='うんこ漏れそう'))
-    text = event.message.text)
+    # text = event.message.text)
 
 # 画像が送られきた時の処理
-@handler.add(MessageEvent, message = ImageMessage)
+@handler.add(MessageEvent, message=ImageMessage)
 def handle_image(event):
     # print("handle_image:", event)
-    message_id=event.message.id
-    message_content=line_bot_api.get_message_content(message_id)
+    message_id = event.message.id
+    message_content = line_bot_api.get_message_content(message_id)
 
     # image=BytesIO(message_content.content)
 
     try:
         # result=search_product(image)
 
-        messages=[
+        messages = [
             TextSendMessage(text=result),
             TextSendMessage(text='食品パッケージ/書籍/CD/DVD/ゲームソフト/PCソフトを検索できるよ！')
         ]
 
-        reply_message(event,messages)
+        reply_message(event, messages)
 
     except Exception as e:
         print("error:", e)
         reply_message(event, TextSendMessage(text='エラーが発生しました'))
 
-def reply_message(event,messages):
+
+def reply_message(event, messages):
     line_bot_api.reply_message(
         event.reply_token,
         messages=messages
@@ -88,5 +89,5 @@ def reply_message(event,messages):
 if __name__ == "__main__":
     #    app.run()
     # 追加しましたby Ryoga 2020/3/5
-    port=int(os.getenv("PORT", 5000))
-    app.run(host = "0.0.0.0", port = port)
+    port = int(os.getenv("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
