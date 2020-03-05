@@ -72,9 +72,9 @@ def handle_message(event):
 
         messages = [TextSendMessage(text='少々お待ちください')]
         # result_listは2重配列
-        result_list = wget.getStoreInfo()
+        result_list = wget.getStoreInfo(event.message.text)
         for list in result_list:
-            out_text = list[0] + list[1]
+            out_text = list[0] + '\n' + list[1]
             messages.append(TextSendMessage(text=out_text))
 
         reply_message(event, messages)
