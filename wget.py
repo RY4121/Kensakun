@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from selenium.webdriver.common.keys import Keys
 import traceback
 import requests
 import chromedriver_binary
@@ -28,7 +29,6 @@ import requests
 from requests.compat import urljoin
 current_dir = pathlib.Path(__file__).resolve().parent
 sys.path.append(str(current_dir) + '/../')
-
 # from modules.db_util import *
 # from modules.update_db import *
 
@@ -54,10 +54,12 @@ def form_submit(base_url, search_word):
         time.sleep(5)
         print('word.send_keys(search_word)')
 
-        driver.find_element_by_xpath(
-            '/html/body/header/div[2]/div[1]/form/div[3]').click()
+        input = driver.find_element_by_xpath(
+            '//*[@id="naviapi-search-submit"]')
+        input.send_keys(Keys.ENTER)
+
         # input = driver.find_element_by_xpath(
-        #     '//*[@id="naviapi-search-submit"]').click()
+        #     '/html/body/header/div[2]/div[1]/form/div[3]')
         # driver.execute_script("arguments[0].click();", input)
         time.sleep(5)
         print('ラストスパート')
