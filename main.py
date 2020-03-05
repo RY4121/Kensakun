@@ -11,7 +11,7 @@ from linebot.models import (
 )
 import os
 # from io import BytesIO
-# import wget
+import wget
 app = Flask(__name__)
 
 # 環境変数取得
@@ -59,13 +59,24 @@ def handle_message(event):
 def handle_message(event):
     # wget.getStoreInfo(event.message.text)
     try:
-        messages = [
-            TextSendMessage(text='うんこ漏れそう'),
-            TextSendMessage(text=event.message.text)
-        ]
+        # メッセージリストのサンプル
+        # messages = [
+        #     TextSendMessage(text='うんこ漏れそう'),
+        #     TextSendMessage(text=event.message.text)
+        # ]
+
+        # LineBotApiのメソッドを用いたときのサンプル
         # line_bot_api.reply_message(
         #     event.reply_token,
         #     TextSendMessage(text='うんこ漏れそう'))
+
+        messages = [TextSendMessage(text='少々お待ちください')]
+        # result_listは2重配列
+        result_list = wget.getStoreInfo()
+        for list in result_list:
+            out_text = list[0] + list[1]
+            messages.append(TextSendMessage(text=out_text))
+
         reply_message(event, messages)
     except Exception as e:
         print("error:", e)
