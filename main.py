@@ -84,7 +84,7 @@ def handle_message(event):
             # messages.append(TextSendMessage(text=out_text))
             push_message(
                 event, [
-                    TextSendMessage(text=out_text1)
+                    TextSendMessage(text=out_text1),
                     TextSendMessage(text=out_text2)
                 ]
             )
