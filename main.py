@@ -79,6 +79,9 @@ def handle_message(event):
         # result_listは2重配列
         result_list = wget.getStoreInfo(event.message.text)
         # del result_list[5:]
+        if len(result_list) == 0:
+            result_list.append('検索結果')
+            result_list.append('0')
         for list in result_list:
             out_text1 = list[0]
             out_text2 = list[1]

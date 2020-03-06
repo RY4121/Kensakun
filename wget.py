@@ -125,9 +125,6 @@ def getStoreInfo(search_word):
     if error_flag:
         title_list.append('何らかの理由で取得できませんでした')
         link_list.append(em)
-    else:
-        title_list.append('Seki')
-        link_list.append('Akio')
 
     result_list = []
     for x, y in zip(title_list, link_list):
