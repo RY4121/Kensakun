@@ -65,7 +65,7 @@ def handle_message(event):
     )
 
     # DMMから検索結果を返す
-    # callAvGetProg(event)
+    # callAvByDmm(event)
 
     # ButtonsTemplate処理
     message_template = make_button_template()
@@ -115,7 +115,7 @@ def push_message(event, messages):
     )
 
 
-def callAvGetProg(event):
+def callAvByDmm(event):
     try:
         # reply_message(event, messages)
         # result_listは2重配列
@@ -159,6 +159,10 @@ def make_button_template():
                  MessageTemplateAction(
                      label='message',
                      text='message text'
+                 ),
+                MessageTemplateAction(
+                     label='message2',
+                     text='message text2'
                  )
             ]
         )
