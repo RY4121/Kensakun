@@ -1,7 +1,6 @@
 Flask==1.1.1
 line-bot-sdk==1.16.0
 
-autopep8==1.5
 backoff==1.10.0
 beautifulsoup4==4.8.2
 bs4==0.0.1
@@ -10,8 +9,6 @@ certifi==2019.11.28
 chardet==3.0.4
 chromedriver-binary==80.0.3987.16.0
 Click==7.0
-Django==2.2.6
-django-bootstrap4==1.1.1
 Flask==1.1.1
 future==0.18.2
 google-api-python-client==1.7.11
@@ -27,7 +24,6 @@ modules==1.0.0
 numpy==1.18.1
 oauth2client==4.1.3
 pandas==1.0.1
-pep8==1.7.1
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 pycodestyle==2.5.0

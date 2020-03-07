@@ -7,11 +7,11 @@ from linebot.exceptions import (
     InvalidSignatureError
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, URIAction, StickerMessage, StickerSendMessage, ImageMessage  # こ↑こ↓が追加分
+    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, URIAction, StickerMessage, StickerSendMessage, ImageMessage, MessageTemplateAction  # こ↑こ↓が追加分
 )
 import os
 # from io import BytesIO
-# import wget
+import wget
 app = Flask(__name__)
 
 # 環境変数取得
