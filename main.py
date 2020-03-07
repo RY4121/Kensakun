@@ -11,7 +11,7 @@ from linebot.models import (
 )
 import os
 # from io import BytesIO
-import wget
+# import wget
 app = Flask(__name__)
 
 # 環境変数取得
@@ -57,52 +57,22 @@ def handle_message(event):
 # メッセージが送られてきたときの処理
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    # wget.getStoreInfo(event.message.text)
-    try:
-        # メッセージリストのサンプル
-        # messages = [
-        #     TextSendMessage(text='うんこ漏れそう'),
-        #     TextSendMessage(text=event.message.text)
-        # ]
 
-        # LineBotApiのメソッドを用いたときのサンプル
-        # line_bot_api.reply_message(
-        #     event.reply_token,
-        #     TextSendMessage(text='うんこ漏れそう'))
+    messages = []
+    push_message(
+        event,
+        TextSendMessage(text='少々お待ちください')
+    )
 
-        messages = []
-        push_message(
-            event,
-            TextSendMessage(text='少々お待ちください')
-        )
-        # reply_message(event, messages)
-        # result_listは2重配列
-        result_list = wget.getStoreInfo(event.message.text)
-        # del result_list[5:]
-        if len(result_list) == 0:
-            result_list.append(['検索結果', '0'])
-            # result_list.append('0')
-        for list in result_list:
-            out_text1 = list[0]
-            out_text2 = list[1]
-            # messages.append(TextSendMessage(text=out_text))
-            push_message(
-                event, [
-                    TextSendMessage(text=out_text1),
-                    TextSendMessage(text=out_text2)
-                ]
-            )
-        push_message(
-            event, [
-                TextSendMessage(text='Enjoy masturbation!!')
-            ]
-        )
-        # reply_message(event, messages)
-    except Exception as e:
-        print("error:", e)
-        reply_message(
-            event, TextSendMessage(text=str(e))
-        )
+    # DMMから検索結果を返す
+    # callAvGetProg(event)
+
+    # ButtonsTemplate処理
+    message_template = make_button_template()
+    push_message(
+        event,
+        TemplateSendMessage(message_template)
+    )
 
 
 # 画像が送られきた時の処理
@@ -143,6 +113,58 @@ def push_message(event, messages):
         event.source.user_id,
         messages=messages
     )
+
+
+def callAvGetProg(event):
+    try:
+        # reply_message(event, messages)
+        # result_listは2重配列
+        result_list = wget.getStoreInfo(event.message.text)
+        # del result_list[5:]
+        if len(result_list) == 0:
+            result_list.append(['検索結果', '0'])
+            # result_list.append('0')
+        for list in result_list:
+            out_text1 = list[0]
+            out_text2 = list[1]
+            # messages.append(TextSendMessage(text=out_text))
+            push_message(
+                event, [
+                    TextSendMessage(text=out_text1),
+                    TextSendMessage(text=out_text2)
+                ]
+            )
+
+        push_message(
+            event, [
+                TextSendMessage(text='Enjoy masturbation!!')
+            ]
+        )
+    except Exception as e:
+        print("error:", e)
+        reply_message(
+            event, TextSendMessage(text=str(e))
+        )
+
+
+def make_button_template():
+    message_template = TemplateSendMessage(
+        alt_text="にゃーん",
+        template=ButtonsTemplate(
+            text="どこに表示されるかな？",
+            title="タイトルですよ",
+            image_size="cover",
+            thumbnail_image_url="https://www.shimay.uno/nekoguruma/wp-content/uploads/sites/2/2018/03/20171106_212850.jpg",
+            actions=[
+                 MessageTemplateAction(
+                     label='message',
+                     text='message text'
+                 )
+            ]
+        )
+    )
+
+    return message_template
 
 
 if __name__ == "__main__":
