@@ -71,7 +71,7 @@ def handle_message(event):
     message_template = make_button_template()
     push_message(
         event,
-        TemplateSendMessage(message_template)
+        message_template
     )
 
 

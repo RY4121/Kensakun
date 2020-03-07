@@ -17,7 +17,7 @@ import codecs
 import urllib.parse as par
 import urllib.request as req
 from bs4 import BeautifulSoup
-import pandas as pd
+# import pandas as pd
 import re
 import ssl
 import csv
