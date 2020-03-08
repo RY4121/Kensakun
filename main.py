@@ -12,6 +12,7 @@ from linebot.models import (
 import os
 # from io import BytesIO
 import wget
+import sheetsample as gs
 app = Flask(__name__)
 
 # 環境変数取得
@@ -64,6 +65,11 @@ def handle_message(event):
         TextSendMessage(text='少々お待ちください')
     )
 
+    tx = gs.setData()
+    push_message(
+        event,
+        TextSendMessage(text=tx)
+    )
     # DMMから検索結果を返す
     # callAvByDmm(event)
 
@@ -149,21 +155,30 @@ def callAvByDmm(event):
 
 def make_button_template():
     message_template = TemplateSendMessage(
-        alt_text="にゃーん",
+        alt_text="新規メッセージです",
         template=ButtonsTemplate(
-            text="どこに表示されるかな？",
-            title="タイトルですよ",
+            text="大学のバスの時間を教えます",
+            title="知りたい情報を以下から選んでください",
             image_size="cover",
             thumbnail_image_url="https://www.shimay.uno/nekoguruma/wp-content/uploads/sites/2/2018/03/20171106_212850.jpg",
             actions=[
                  MessageTemplateAction(
-                     label='message',
-                     text='message text'
+                     label='みなみ野駅発',
+                     text='type1'
                  ),
                 MessageTemplateAction(
-                     label='message2',
-                     text='message text2'
+                     label='キャンパス発みなみ野駅行',
+                     text='type2'
+                 ),
+                MessageTemplateAction(
+                     label='八王子駅発',
+                     text='type3'
+                 ),
+                MessageTemplateAction(
+                     label='キャンパス発八王子駅行',
+                     text='type4'
                  )
+
             ]
         )
     )
