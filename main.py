@@ -10,6 +10,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage, ButtonsTemplate, URIAction, StickerMessage, StickerSendMessage, ImageMessage, MessageTemplateAction  # こ↑こ↓が追加分
 )
 import os
+import time
 # from io import BytesIO
 import wget
 import sheetsample as gs
@@ -66,6 +67,7 @@ def handle_message(event):
     )
 
     tx = gs.setData()
+    time.sleep(2)
     push_message(
         event,
         TextSendMessage(text=tx)
