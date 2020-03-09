@@ -91,7 +91,7 @@ class Time:
             return time_info
         except Exception as e:
             print(e)
-            return '今日のバスの運行はありません'
+            return ['今日のバスの運行はありません']
 
 
 if __name__ == '__main__':
