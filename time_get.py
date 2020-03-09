@@ -75,7 +75,7 @@ class Time:
         try:
             now = datetime.today()
 
-            now = datetime(2015, 1, 1, 12, 30, 59, 0)
+            # now = datetime(2015, 1, 1, 12, 30, 59, 0)
             TIME_WIDTH = 5
             hour_index = hour_list.index(str(now.hour))
             h_t = hour_list[hour_index:hour_index + TIME_WIDTH]
