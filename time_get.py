@@ -24,7 +24,7 @@ class Time:
 
     def getData(self, type):
         request = req.urlopen(self.base_url)
-        soup = BeautifulSoup(request, "lxml")
+        soup = BeautifulSoup(request, "html.parser")
 
         time_list = []
         hour_list = []
