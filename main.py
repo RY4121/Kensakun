@@ -11,7 +11,7 @@ from linebot.models import (
 )
 import os
 import time
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 # from io import BytesIO
 import wget
 # import sheetsample as gs
@@ -202,10 +202,13 @@ def make_button_template():
 def searchBusTime(text):
     # time_info = ''
     TYPE = 0
-    if datetime.now().strftime('%A') == 'Sunday':
+    # タイムゾーンの生成
+    JST = timezone(timedelta(hours=+9), 'JST')
+    now = datetime.now(JST)
+    if now.strftime('%A') == 'Sunday':
         return '日曜日のバスの運行はありません'
 
-    if datetime.now().strftime('%A') == 'Saturday':
+    if now.strftime('%A') == 'Saturday':
         OBJECT_URL = 'https://www.teu.ac.jp/campus/access/2020_0307_0314_bus.html'
     else:
         OBJECT_URL = 'https://www.teu.ac.jp/campus/access/2020_0303_0318_bus.html'

@@ -14,7 +14,7 @@ import csv
 import os
 import sys
 import pathlib
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 
 class Time:
@@ -73,7 +73,10 @@ class Time:
                     minute_list[minute_list.index(y)] = '0' + y.split('0')[1]
 
         try:
-            now = datetime.now()
+            # now = datetime.now() #これだとherokuサーバと時間がずれる
+            # タイムゾーンの生成
+            JST = timezone(timedelta(hours=+9), 'JST')
+            now = datetime.now(JST)
             # print(now)
             # now = datetime(2015, 1, 1, 12, 30, 59, 0)
             TIME_WIDTH = 5
