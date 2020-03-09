@@ -62,9 +62,15 @@ class Time:
         # 2桁のうち0を排除
         for x, y in zip(hour_list, minute_list):
             if x.split('0')[0] == '':
-                hour_list[hour_list.index(x)] = x.split('0')[1]
+                if x.split('0')[1] == '':
+                    hour_list[hour_list.index(x)] = '00'
+                else:
+                    hour_list[hour_list.index(x)] = '0' + x.split('0')[1]
             if y.split('0')[0] == '':
-                minute_list[minute_list.index(y)] = y.split('0')[1]
+                if y.split('0')[1] == '':
+                    minute_list[minute_list.index(y)] = '00'
+                else:
+                    minute_list[minute_list.index(y)] = '0' + y.split('0')[1]
 
         try:
             now = datetime.today()
@@ -74,6 +80,7 @@ class Time:
             hour_index = hour_list.index(str(now.hour))
             h_t = hour_list[hour_index:hour_index + TIME_WIDTH]
             m_t = minute_list[hour_index:hour_index + TIME_WIDTH]
+            print('MINUTE_TIME', m_t)
             time_info = []
             for x, y in zip(h_t, m_t):
                 time_info.append(x + ':' + y)
@@ -87,4 +94,4 @@ class Time:
 if __name__ == '__main__':
     OBJECT_URL = 'https://www.teu.ac.jp//campus/access/2020_0307_0314_bus.html'
     time = Time(OBJECT_URL)
-    print(time.getData(1))
+    print(time.getData(3))
