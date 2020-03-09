@@ -43,6 +43,7 @@ class Time:
                 else:
                     time_list.append(value.text)
 
+        # 4パターン分けた
         if type == 1:
             time_list = time_list[1::4]
         elif type == 2:
@@ -52,7 +53,6 @@ class Time:
         elif type == 4:
             time_list = time_list[0::4]
 
-        # print('time_list::', time_list)
         # 時間と分に分けて格納
         for x in time_list:
             if x != '':
@@ -77,9 +77,9 @@ class Time:
             # タイムゾーンの生成
             JST = timezone(timedelta(hours=+9), 'JST')
             now = datetime.now(JST)
-            # print(now)
+            print('プログラム取得現在時刻::', now)
             # now = datetime(2015, 1, 1, 12, 30, 59, 0)
-            TIME_WIDTH = 5
+            TIME_WIDTH = 8
             hour_index = hour_list.index(str(now.hour))
             h_t = hour_list[hour_index:hour_index + TIME_WIDTH]
             m_t = minute_list[hour_index:hour_index + TIME_WIDTH]
@@ -96,4 +96,4 @@ class Time:
 if __name__ == '__main__':
     OBJECT_URL = 'https://www.teu.ac.jp//campus/access/2020_0307_0314_bus.html'
     time = Time(OBJECT_URL)
-    print('time.getData(3)', time.getData(3))
+    print('time.getData(3)::', time.getData(3))
