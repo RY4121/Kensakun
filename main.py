@@ -14,6 +14,7 @@ import time
 # from io import BytesIO
 import wget
 import sheetsample as gs
+import time_get as tg
 app = Flask(__name__)
 
 # 環境変数取得
@@ -66,14 +67,23 @@ def handle_message(event):
         TextSendMessage(text='少々お待ちください')
     )
 
-    tx = gs.setData()
-    time.sleep(2)
-    push_message(
-        event,
-        TextSendMessage(text=tx)
-    )
-    # DMMから検索結果を返す
-    # callAvByDmm(event)
+    if '駅' in event.message.text:
+        # call function
+        time_info_list = searchBusTime(event.message.text)
+        messages = []
+        for x in time_info_list:
+            messages.append(TextSendMessage(text=x))
+        push_message(
+            event,
+            messages
+        )
+    else:
+        # DMMから検索結果を返す
+        # callAvByDmm(event)
+        push_message(
+            event,
+            TextSendMessage(text='大学は楽しいですか？私も行ってみたいです')
+        )
 
     # ButtonsTemplate処理
     message_template = make_button_template()
@@ -166,19 +176,19 @@ def make_button_template():
             actions=[
                  MessageTemplateAction(
                      label='みなみ野駅発',
-                     text='type1'
+                     text='みなみ野駅発'
                  ),
                 MessageTemplateAction(
                      label='キャンパス発みなみ野駅行',
-                     text='type2'
+                     text='キャンパス発みなみ野駅行'
                  ),
                 MessageTemplateAction(
                      label='八王子駅発',
-                     text='type3'
+                     text='八王子駅発'
                  ),
                 MessageTemplateAction(
                      label='キャンパス発八王子駅行',
-                     text='type4'
+                     text='キャンパス発八王子駅行'
                  )
 
             ]
@@ -186,6 +196,36 @@ def make_button_template():
     )
 
     return message_template
+
+
+def searchBusTime(text):
+    # time_info = ''
+    TYPE = 0
+    if datetime.now().strftime('%A') == 'Sunday':
+        return '今日のバスの運行はありません'
+
+    if datetime.now().strftime('%A') == 'Saturday':
+        OBJECT_URL = 'https://www.teu.ac.jp/campus/access/2020_0307_0314_bus.html'
+    else:
+        OBJECT_URL = 'https://www.teu.ac.jp/campus/access/2020_0303_0318_bus.html'
+    time = tg.Time(OBJECT_URL)
+
+    if text == 'みなみ野駅発':
+        TYPE = 1
+        tx = time.getData(TYPE)
+    elif text == 'キャンパス発みなみ野駅行':
+        TYPE = 2
+        tx = time.getData(TYPE)
+    elif text == '八王子駅発':
+        TYPE = 3
+        tx = time.getData(TYPE)
+    elif text == 'キャンパス発八王子駅行':
+        TYPE = 4
+        tx = time.getData(TYPE)
+    else:
+        tx = 'Error'
+    time_info = tx
+    return time_info
 
 
 if __name__ == "__main__":

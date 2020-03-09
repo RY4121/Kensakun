@@ -1,8 +1,10 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
+import time
+from datetime import datetime
 
 
-def setData():
+def setData(TYPE):
     scope = ['https://spreadsheets.google.com/feeds',
              'https://www.googleapis.com/auth/drive']
 
@@ -12,18 +14,34 @@ def setData():
 
     # OAuth2の資格情報を使用してGoogleAPIにログイン
     gc = gspread.authorize(credentials)
-
+    time.sleep(1)
     # 共有設定したスプレッドシートキーを変数[SPREADSHEET_KEY]に格納する。
     SPREADSHEET_KEY = '1NsffW_m8PkfyJ1fp3ILfcPT8NHGP_RE3f8bkCR6bk2c'
 
     # wkss := worksheets
     wkss = gc.open_by_key(SPREADSHEET_KEY)
+    time.sleep(1)
     wkss_list = wkss.worksheets()
     wks_1 = wkss_list[0]  # sheet1
     wks_2 = wkss_list[1]  # sheet2
-    wks_3 = wkss_list[2]
+    wks_3 = wkss_list[2]  # sheet3
 
-    return wks_1.cell(2, 1).value
+    pre_t = datetime.now().strftime("%H:%M")
+    if TYPE == 1:
+        return wks_1.cell(2, 1).value
+    elif TYPE = 2:
+        return wks_1.cell(2, 1).value
+    elif TYPE = 3:
+        return wks_1.cell(2, 1).value
+    elif TYPE = 4:
+        return wks_1.cell(2, 1).value
+    else:
+        return '該当の情報がありません。もう一度お試しください'
+
+
+'''
+以下SHEET生成プログラム
+'''
 # sheet2でリンクを生成
 # for i in range(2, 10):
 #     t = '=IMPORTXML(A$2,' + 'C' + str(i) + ')'
