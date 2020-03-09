@@ -89,7 +89,8 @@ class Time:
                 time_info.append(x + ':' + y)
             print('time_info', time_info)
             return time_info
-        except ValueError:
+        except Exception as e:
+            print(e)
             return '今日のバスの運行はありません'
 
 
