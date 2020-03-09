@@ -29,11 +29,11 @@ def setData(TYPE):
     pre_t = datetime.now().strftime("%H:%M")
     if TYPE == 1:
         return wks_1.cell(2, 1).value
-    elif TYPE = 2:
+    elif TYPE == 2:
         return wks_1.cell(2, 1).value
-    elif TYPE = 3:
+    elif TYPE == 3:
         return wks_1.cell(2, 1).value
-    elif TYPE = 4:
+    elif TYPE == 4:
         return wks_1.cell(2, 1).value
     else:
         return '該当の情報がありません。もう一度お試しください'

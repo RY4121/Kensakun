@@ -13,7 +13,7 @@ import os
 import time
 # from io import BytesIO
 import wget
-import sheetsample as gs
+# import sheetsample as gs
 import time_get as tg
 app = Flask(__name__)
 
