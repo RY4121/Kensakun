@@ -203,7 +203,7 @@ def searchBusTime(text):
     # time_info = ''
     TYPE = 0
     if datetime.now().strftime('%A') == 'Sunday':
-        return '今日のバスの運行はありません'
+        return '日曜日のバスの運行はありません'
 
     if datetime.now().strftime('%A') == 'Saturday':
         OBJECT_URL = 'https://www.teu.ac.jp/campus/access/2020_0307_0314_bus.html'

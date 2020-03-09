@@ -52,7 +52,7 @@ class Time:
         elif type == 4:
             time_list = time_list[0::4]
 
-        print('time_list::', time_list)
+        # print('time_list::', time_list)
         # 時間と分に分けて格納
         for x in time_list:
             if x != '':
@@ -73,25 +73,24 @@ class Time:
                     minute_list[minute_list.index(y)] = '0' + y.split('0')[1]
 
         try:
-            now = datetime.today()
-
+            now = datetime.now()
+            # print(now)
             # now = datetime(2015, 1, 1, 12, 30, 59, 0)
             TIME_WIDTH = 5
             hour_index = hour_list.index(str(now.hour))
             h_t = hour_list[hour_index:hour_index + TIME_WIDTH]
             m_t = minute_list[hour_index:hour_index + TIME_WIDTH]
-            print('MINUTE_TIME', m_t)
+            # print('MINUTE_TIME', m_t)
             time_info = []
             for x, y in zip(h_t, m_t):
                 time_info.append(x + ':' + y)
-            # print(time_info)
+            print('time_info', time_info)
             return time_info
         except ValueError:
-            print('今日のバスの運行はありません')
             return '今日のバスの運行はありません'
 
 
 if __name__ == '__main__':
     OBJECT_URL = 'https://www.teu.ac.jp//campus/access/2020_0307_0314_bus.html'
     time = Time(OBJECT_URL)
-    print(time.getData(3))
+    print('time.getData(3)', time.getData(3))
