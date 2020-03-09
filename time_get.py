@@ -72,6 +72,7 @@ class Time:
                 else:
                     minute_list[minute_list.index(y)] = '0' + y.split('0')[1]
 
+        time_info = []
         try:
             # now = datetime.now() #これだとherokuサーバと時間がずれる
             # タイムゾーンの生成
@@ -84,14 +85,16 @@ class Time:
             h_t = hour_list[hour_index:hour_index + TIME_WIDTH]
             m_t = minute_list[hour_index:hour_index + TIME_WIDTH]
             # print('MINUTE_TIME', m_t)
-            time_info = []
+
             for x, y in zip(h_t, m_t):
                 time_info.append(x + ':' + y)
             print('time_info', time_info)
             return time_info
         except Exception as e:
             print(e)
-            return ['今日のバスの運行はありません']
+            time_info.append('直近のバスの運行はありません。次の時間まで待ってください')
+            time_info.append(hour_list[0] + ':' + minute_list[0])
+            return time_info
 
 
 if __name__ == '__main__':
