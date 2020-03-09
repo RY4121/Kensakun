@@ -43,9 +43,13 @@ class Time:
                 else:
                     time_list.append(value.text)
 
-        if type == 1 or type == 2:
+        if type == 1:
             time_list = time_list[1::4]
-        elif type == 3 or type == 4:
+        elif type == 2:
+            time_list = time_list[0::4]
+        elif type == 3:
+            time_list = time_list[1::4]
+        elif type == 4:
             time_list = time_list[0::4]
 
         print('time_list::', time_list)
