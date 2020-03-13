@@ -71,9 +71,9 @@ def handle_message(event):
     if '駅' in event.message.text:
         # call function
         time_info_list = searchBusTime(event.message.text)
-        messages = []
         for x in time_info_list:
             messages.append(TextSendMessage(text=x))
+
         push_message(
             event,
             messages
